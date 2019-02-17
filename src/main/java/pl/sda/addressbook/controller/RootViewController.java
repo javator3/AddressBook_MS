@@ -1,19 +1,25 @@
 package pl.sda.addressbook.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import pl.sda.addressbook.model.Person;
+import pl.sda.addressbook.model.PersonHelp;
 import pl.sda.addressbook.view.PersonView;
-
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
+
 
 public class RootViewController implements Initializable {
-
 
 
     @FXML
@@ -32,6 +38,8 @@ public class RootViewController implements Initializable {
     @FXML
     private Button saveContact;
 
+    @FXML
+    private Button importContact;
 
     @FXML
     private Label nameLabel;
@@ -62,8 +70,6 @@ public class RootViewController implements Initializable {
 
     @FXML
     private ImageView image;
-
-
 
     private PersonView personView;
 
@@ -121,5 +127,65 @@ public class RootViewController implements Initializable {
     }
 
     public void saveContact(ActionEvent actionEvent) {
+
+        ObjectMapper mapper = new ObjectMapper();
+        File file = new File("contacts.json");
+
+        try {
+            mapper.writeValue(file,personView.getPersonList());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void importContact(ActionEvent actionEcent){
+
+
+        ObjectMapper mapper = new ObjectMapper();
+        File file = new File("contacts.json");
+
+        List<PersonHelp> kontakty = null;
+
+        try {
+            PersonHelp[] jsonabkontaktow = mapper.readValue(file,PersonHelp[].class);
+            kontakty = Arrays.asList(jsonabkontaktow);
+
+
+           // for (PersonHelp s:kontakty
+           // ) {System.out.println(s.getName() + " " + s.getLastname());
+           // }
+
+
+           } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        for (PersonHelp x:kontakty
+        ) {
+
+            String pt = x.getTelephone();
+            String name = x.getName();
+            String lname = x.getLastname();
+            String street = x.getStreet();
+            String city = x.getCity();
+            String postcode = x.getPostalCode();
+            String telephone = x.getTelephone();
+
+            this.personView.getPersonList().add(new Person(name,lname,street,city,postcode,telephone));
+
+                    }
+
+
+        this.personTableView.refresh();
+
+        for (Person y:this.personView.getPersonList()
+        ) {
+            System.out.println(" aa:" + y.nameProperty());
+
+        }
+
+
+
     }
 }

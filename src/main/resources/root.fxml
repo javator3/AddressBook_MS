@@ -64,12 +64,13 @@
                                     <Label fx:id="telephoneLabel" text="Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
                                  </children>
                               </GridPane>
-                              <ButtonBar  fx:id="brbar" layoutX="28.0" layoutY="283.0" prefHeight="69.0" prefWidth="362.0">
+                              <ButtonBar fx:id="brbar" layoutX="2.0" layoutY="283.0" prefHeight="69.0" prefWidth="362.0">
                                 <buttons>
-                                    <Button fx:id="newContact" onAction="#setNewContact"  alignment="TOP_CENTER" mnemonicParsing="false" text="New" textAlignment="CENTER" textFill="#dd2ddd"  />
-                                    <Button  fx:id="editContact" onAction="#editContact" alignment="CENTER" mnemonicParsing="false" text="Edit" textAlignment="CENTER" textFill="#dd0d0d" />
-                                    <Button fx:id="deleteContact" onAction="#deleteContact"  mnemonicParsing="false" text="Delete" textAlignment="CENTER" textFill="#00AB84" />
-                                    <Button fx:id="saveContact" onAction="#saveContact"  mnemonicParsing="false" text="Save" textAlignment="CENTER" textFill="#0a0c0a" />
+                                    <Button fx:id="newContact" alignment="TOP_CENTER" mnemonicParsing="false" onAction="#setNewContact" text="New" textAlignment="CENTER" textFill="#dd2ddd" />
+                                    <Button fx:id="editContact" alignment="CENTER" mnemonicParsing="false" onAction="#editContact" text="Edit" textAlignment="CENTER" textFill="#dd0d0d" />
+                                    <Button fx:id="deleteContact" mnemonicParsing="false" onAction="#deleteContact" text="Delete" textAlignment="CENTER" textFill="#00AB84" />
+                                    <Button fx:id="saveContact" mnemonicParsing="false" onAction="#saveContact" text="Save" textAlignment="CENTER" textFill="#0a0c0a" />
+                                    <Button fx:id="importContact" onAction="#importContact" mnemonicParsing="false" text="Import" textFill="#1705da" />
                                 </buttons>
                               </ButtonBar>
                            </children>

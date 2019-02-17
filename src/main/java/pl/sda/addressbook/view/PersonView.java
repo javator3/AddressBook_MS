@@ -17,7 +17,7 @@ public class PersonView {
 
     private Stage stage;
 
-    public static ObservableList<Person> personList = FXCollections.observableArrayList();
+   public static ObservableList<Person> personList = FXCollections.observableArrayList();
 
     public PersonView(Stage stage) {
         this.stage = stage;
@@ -75,15 +75,14 @@ public class PersonView {
 
     public void loadNewPerson(){
 
-      //  personView.loadNewPersonView();
-
+        // personView.loadNewPersonView();
         // 1 zaladowac fxml
         // 2 stworzyc kontroler
         // 3 wyswietlic widok
         // w klasie NewPersonController stworzyc funkcje savePerson
-        //savePerson ma bnc wuwolywana w molmencie kierdu klikanimemy w button save
+        // savePerson ma bnc wuwolywana w molmencie kierdu klikanimemy w button save
         // nowy Person ustawiamy wartosci tekst Field
-       // dodanie obiektu na liscie
+        // dodanie obiektu na liscie
 
 
         FXMLLoader loader = new FXMLLoader();
@@ -105,9 +104,7 @@ public class PersonView {
 
         NewPersonController newPersonController = loader.getController();
         newPersonController.setPersonView(this);
-       // newPersonController.savePerson();
 
-        //getPersonList().add(new Person("","","","","",""));
     }
 
 

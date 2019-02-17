@@ -34,6 +34,10 @@ public class Person {
         this.telephone = new SimpleStringProperty(telephone);
     }
 
+    public Person(){
+
+    }
+
     public String getName() {
         return name.get();
     }
