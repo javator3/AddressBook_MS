@@ -5,6 +5,15 @@ import javafx.beans.property.StringProperty;
 
 import java.util.Objects;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+
 public class Person {
 
     private StringProperty name;
@@ -14,17 +23,6 @@ public class Person {
     private StringProperty postalCode;
     private StringProperty telephone;
 
-    //stringProperty - string typ danych obserwowny
-
-//    public Person(StringProperty name, StringProperty lastname, StringProperty street, StringProperty city, StringProperty postalCode, StringProperty telephone) {
-//        this.name = name;
-//        this.lastname = lastname;
-//        this.street = street;
-//        this.city = city;
-//        this.postalCode = postalCode;
-//        this.telephone = telephone;
-//    }
-//
     public Person(String name, String lastname, String street, String city, String postalCode, String telephone){
         this.name = new SimpleStringProperty(name);
         this.lastname = new SimpleStringProperty(lastname);
@@ -34,9 +32,10 @@ public class Person {
         this.telephone = new SimpleStringProperty(telephone);
     }
 
-    public Person(){
-
-    }
+    // poszlo Lombokiem:
+//    public Person(){
+//
+//    }
 
     public String getName() {
         return name.get();

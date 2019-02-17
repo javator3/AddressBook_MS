@@ -48,10 +48,11 @@
                   <TextField fx:id="personTelephon" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                </children>
             </GridPane>
-            <ButtonBar fx:id="personButtonBar" layoutX="358.0" layoutY="311.0" prefHeight="40.0" prefWidth="200.0">
+            <ButtonBar fx:id="personButtonBar" layoutX="216.0" layoutY="311.0" prefHeight="40.0" prefWidth="200.0">
               <buttons>
-                <Button fx:id="personSave" onAction="#savePerson" mnemonicParsing="false" text="Save" />
-                  <Button fx:id="personCancel" onAction="#cancelPerson" mnemonicParsing="false" text="Cancel" />
+                <Button fx:id="personNewSave" mnemonicParsing="false" onAction="#saveNewPerson" text="Save New" />
+                  <Button fx:id="personCancel" mnemonicParsing="false" onAction="#cancelPerson" text="Cancel" />
+                  <Button fx:id="personSave" mnemonicParsing="false" onAction="#savePerson" text="Save" />
               </buttons>
             </ButtonBar>
          </children>

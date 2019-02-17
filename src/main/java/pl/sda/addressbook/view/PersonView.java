@@ -35,6 +35,7 @@ public class PersonView {
         return personList;
     }
 
+
     public Stage getStage() {
         return stage;
     }
@@ -48,11 +49,9 @@ public class PersonView {
     }
 
     public void loadView(){
-        //zaladowac i wyswietlic widok rootview
 
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/root.fxml"));
-
 
         try {
             loader.load();
@@ -73,8 +72,13 @@ public class PersonView {
         stage.show();
     }
 
-    public void loadNewPerson(){
+    public void deletePerson(int index){
 
+        this.getPersonList().remove(index);
+
+    }
+    public void loadNewPerson(){
+        System.out.println(" tu ok");
         // personView.loadNewPersonView();
         // 1 zaladowac fxml
         // 2 stworzyc kontroler
@@ -108,5 +112,34 @@ public class PersonView {
     }
 
 
+    public Stage getNewPersonStage() {
 
+         return this.getStage();
+    }
+
+    public void loadPersonEdit(Person person, int index) {
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/newperson.fxml"));
+
+        Stage stage2 = new Stage();
+
+        try {
+            loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Parent parent = loader.getRoot();
+
+        stage2.setScene(new Scene(parent,600,400));
+        stage2.setTitle("Edit person");
+        stage2.show();
+
+        NewPersonController newPersonController = loader.getController();
+        newPersonController.setPersonView(this);
+        newPersonController.setIndex(index);
+        newPersonController.editPerson(this.getPersonList().get(index),index);
+
+            }
 }

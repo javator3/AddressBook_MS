@@ -7,6 +7,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import pl.sda.addressbook.model.Person;
 import pl.sda.addressbook.model.PersonHelp;
 import pl.sda.addressbook.view.PersonView;
@@ -87,12 +90,14 @@ public class RootViewController implements Initializable {
         personTableView.setItems(personView.getPersonList());
 
 
-        String nm;
         personTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
+                Person person = personTableView.getSelectionModel().getSelectedItem();
                 System.out.println(newSelection.nameProperty());
             }
         });
+
+
 
         nameLabel.setText("asd");
         lastnameLabel.setText(" ... ");
@@ -103,6 +108,7 @@ public class RootViewController implements Initializable {
 
         nameCol.setCellValueFactory(c -> c.getValue().nameProperty());
         lastnameCol.setCellValueFactory(c -> c.getValue().lastnameProperty());
+        this.personTableView.refresh();
 
     }
 
@@ -113,17 +119,30 @@ public class RootViewController implements Initializable {
     }
 
     public void editContact(ActionEvent actionEvent) {
+
+
+        int index = personTableView.getSelectionModel().getFocusedIndex();
+        Person person = personTableView.getSelectionModel().getSelectedItem();
+        personView.loadPersonEdit(person,index);
+
         this.personTableView.refresh();
-        System.out.println("TEST");
 
-        for (Person x:personView.getPersonList()
-        ) {
-            System.out.println(x.nameProperty());
+//
+//        for (Person x:personView.getPersonList()
+//        ) {
+//            System.out.println(x.nameProperty());
+//
+//        }
 
-        }
+
+
+
     }
 
     public void deleteContact(ActionEvent actionEvent) {
+
+       int index = personTableView.getSelectionModel().getFocusedIndex();
+       this.personView.deletePerson(index);
     }
 
     public void saveContact(ActionEvent actionEvent) {
@@ -139,7 +158,6 @@ public class RootViewController implements Initializable {
     }
 
     public void importContact(ActionEvent actionEcent){
-
 
         ObjectMapper mapper = new ObjectMapper();
         File file = new File("contacts.json");
@@ -160,19 +178,10 @@ public class RootViewController implements Initializable {
             e.printStackTrace();
         }
 
-
         for (PersonHelp x:kontakty
         ) {
 
-            String pt = x.getTelephone();
-            String name = x.getName();
-            String lname = x.getLastname();
-            String street = x.getStreet();
-            String city = x.getCity();
-            String postcode = x.getPostalCode();
-            String telephone = x.getTelephone();
-
-            this.personView.getPersonList().add(new Person(name,lname,street,city,postcode,telephone));
+            this.personView.getPersonList().add(new Person(x.getName(),x.getLastname(),x.getStreet(),x.getCity(),x.getPostalCode(),x.getTelephone()));
 
                     }
 
@@ -188,4 +197,31 @@ public class RootViewController implements Initializable {
 
 
     }
+
+    public void selectedOnMouse(MouseEvent mouseEvent) {
+        Person person = personTableView.getSelectionModel().getSelectedItem();
+
+
+        nameLabel.setText(person.getName());
+        lastnameLabel.setText(person.getLastname());
+        streetLabel.setText(person.getStreet());
+        cityLabel.setText(person.getCity());
+        postalcodeLabel.setText(person.getPostalCode());
+        telephoneLabel.setText(person.getTelephone());
+
+    }
+
+    public void selectedOnKeyReleased(KeyEvent keyEvent) {
+        Person person = personTableView.getSelectionModel().getSelectedItem();
+
+        nameLabel.setText(person.getName());
+        lastnameLabel.setText(person.getLastname());
+        streetLabel.setText(person.getStreet());
+        cityLabel.setText(person.getCity());
+        postalcodeLabel.setText(person.getPostalCode());
+        telephoneLabel.setText(person.getTelephone());
+
+
+    }
+
 }
