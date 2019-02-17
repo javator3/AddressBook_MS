@@ -5,6 +5,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.paint.Color;
+import pl.sda.addressbook.model.Person;
+import pl.sda.addressbook.view.PersonView;
+
+import java.awt.*;
 
 
 public class Main extends Application {
@@ -20,11 +25,20 @@ public class Main extends Application {
 
         @Override
         public void start(Stage primaryStage) throws Exception {
-            Parent root = FXMLLoader.load(
-                    getClass()
-                            .getResource("/root.fxml"));
-            primaryStage.setScene(new Scene(root,600,350));
-            primaryStage.show();
+
+            PersonView personView = new PersonView(primaryStage);
+
+            personView.loadView();
+
+            for (Person x:personView.getPersonList()
+                 ) {
+                System.out.println(x.nameProperty());
+
+            }
+          // primaryStage.show();
+
+
+
         }
         //ile plkow fxml - tyle kontrolerow
 
